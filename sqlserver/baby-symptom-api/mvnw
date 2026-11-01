@@ -1,3 +1,0 @@
-#!/bin/sh
-# macOS / Linux：請先安裝 Maven（brew install maven），或直接執行 mvn
-exec mvn "$@"
