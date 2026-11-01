@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>寶寶症狀 3D 圖解</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <header>
+          <h1>寶寶症狀 3D 圖解</h1>
+          <div class="modes" role="tablist" aria-label="檢視模式">
+            <button type="button" class="mode on" data-mode="general" role="tab" aria-selected="true">一般症狀</button>
+            <button type="button" class="mode" data-mode="preemie" role="tab" aria-selected="false">早產兒對比</button>
+          </div>
+          <p class="muted" id="modeHint">點寶寶身上的部位，或從下方清單選一個症狀。</p>
+        </header>
+        <div class="filters" id="filters"></div>
+        <ul class="symptom-list" id="symptomList"></ul>
+        <p class="disclaimer">
+          本頁為衛教示範，內容僅供參考，不能取代醫師診斷。寶寶狀況不對勁時請就醫，緊急情況請撥 119。
+        </p>
+      </aside>
+
+      <main class="stage">
+        <div id="viewport"></div>
+        <div id="labels" class="labels"></div>
+        <div id="tooltip" class="tooltip" hidden></div>
+
+        <section id="compare" class="compare" hidden>
+          <label class="weeks">
+            <span>早產兒出生週數 <strong id="weeksOut">28 週</strong> <em id="weeksCat"></em></span>
+            <input type="range" id="weeks" min="24" max="36" step="1" value="28" />
+          </label>
+          <table class="stats">
+            <thead><tr><th></th><th>早產兒</th><th>足月</th><th>約為足月的</th></tr></thead>
+            <tbody id="statsBody"></tbody>
+          </table>
+          <p class="note">數值為出生時的約略中位數，參考 Fenton 早產兒生長曲線，每個寶寶都不一樣。</p>
+        </section>
+
+        <button id="resetView" class="reset" type="button">重設視角</button>
+      </main>
+
+      <section id="panel" class="panel"></section>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
