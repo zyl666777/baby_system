@@ -1,0 +1,20 @@
+﻿code,name,category,severity,summary,when_to_see_doctor,status,reviewed_by,reviewed_at,parts,sources
+breathing,呼吸困難,GENERAL,EMERGENCY,寶寶呼吸費力或太快，可能是下呼吸道感染等狀況，需要立刻處理。,出現任何一項都應立即前往急診，情況危急請撥 119。,PUBLISHED,,,"chest,head",
+seizure,抽搐,GENERAL,EMERGENCY,全身或部分肢體不自主抽動，有時伴隨意識不清。,讓寶寶側躺、不要往嘴裡塞東西，記下抽搐時間，立即就醫或撥 119。,PUBLISHED,,,"head,arms,legs",
+fever,發燒,GENERAL,SOON,體溫 38°C 以上通常視為發燒，是身體對抗感染的反應。,未滿 3 個月的寶寶發燒應立即就醫。精神很差、叫不太醒、發燒超過 48 小時，也應盡快就醫。,PUBLISHED,,,head,aap-fever
+jaundice,新生兒黃疸,GENERAL,SOON,新生兒常見，皮膚和眼白偏黃，多數在出生後幾天出現並逐漸消退。,出生 24 小時內就變黃、黃到肚子以下或手腳、大便顏色偏白（可對照兒童健康手冊的嬰兒大便辨識卡），或寶寶嗜睡吃不好，應盡快就醫。,PUBLISHED,,,"head,chest,belly,legs","hpa-stool-color,hpa-child-handbook"
+dehydration,脫水,GENERAL,SOON,腹瀉、嘔吐或喝奶量減少時，寶寶容易流失水分。,超過 6 小時沒有尿、精神變差或持續嘔吐喝不下，應盡快就醫。,PUBLISHED,,,"head,diaper",
+vomiting,嘔吐,GENERAL,SOON,喝奶後少量溢奶很常見；用力、大量或反覆的嘔吐則需要注意。,吐出綠色或帶血、肚子鼓脹、反覆噴射狀嘔吐，請立即就醫。,PUBLISHED,,,belly,
+cold,鼻塞與咳嗽,GENERAL,HOME,感冒常見症狀，多數在一到兩週內改善。,呼吸變喘、發燒、喝奶量明顯減少，或症狀超過兩週沒有改善，應就醫。,PUBLISHED,,,"head,chest",
+colic,腸絞痛,GENERAL,HOME,健康的寶寶每天長時間哭鬧、難以安撫，常在傍晚發生，通常幾個月大後會改善。,伴隨發燒、嘔吐、血便、體重增加不良，或哭聲和平常明顯不同，應就醫。,PUBLISHED,,,belly,
+diaper-rash,尿布疹,GENERAL,HOME,尿布區皮膚因潮濕、摩擦而發紅，勤換尿布、保持乾燥通常會改善。,破皮流湯、出現膿疱、範圍擴大，或照護 3 天仍未改善，應就醫。,PUBLISHED,,,diaper,
+eczema,濕疹,GENERAL,HOME,皮膚乾燥、發紅發癢，常出現在臉頰、手肘和膝蓋。,範圍擴大、滲液結痂、疑似感染，或影響睡眠時，應就醫。,PUBLISHED,,,"head,arms,legs",
+rds,呼吸窘迫症候群,PREEMIE,EMERGENCY,肺部還沒發育成熟、缺少讓肺泡撐開的表面張力素，肺泡容易塌陷，出生後不久就呼吸困難，通常在新生兒加護病房治療。,多在出生後住院期間處理。出院後若再出現呼吸費力、胸部凹陷或膚色發紫，請立即就醫。,PUBLISHED,,,chest,tmuh-preemie
+apnea,早產兒呼吸暫停,PREEMIE,EMERGENCY,控制呼吸的腦部還沒成熟，呼吸會短暫停止，常伴隨心跳變慢，出生週數越小越常見。,在家發現寶寶停止呼吸或膚色發紫，立即輕拍刺激寶寶並撥 119。出院前可請醫護人員教導嬰兒急救。,PUBLISHED,,,"chest,head",tmuh-preemie
+nec,壞死性腸炎,PREEMIE,EMERGENCY,腸道受損發炎，嚴重時腸壁會壞死，多發生在開始餵食之後的早產兒。,肚子脹合併嘔吐綠色液體、血便或活動力變差，請立即就醫。,PUBLISHED,,,belly,tmuh-preemie
+bpd,支氣管肺發育不良,PREEMIE,SOON,早產兒長時間需要氧氣或呼吸器後，肺部發育受到影響，出院後可能仍需氧氣，也比較容易因呼吸道感染而加重。,依醫囑使用氧氣與藥物。感冒時呼吸變喘應盡快就醫；出現胸部凹陷或膚色發紫請立即就醫。,PUBLISHED,,,chest,
+hypothermia,體溫調節不佳,PREEMIE,SOON,早產兒皮下脂肪少、體表面積相對大，比足月寶寶容易失溫。,先幫寶寶保暖並量體溫。體溫持續偏低（腋溫低於 36.5°C）或合併活動力變差，請盡快就醫。,PUBLISHED,,,"head,chest,belly,arms,legs",
+rop,早產兒視網膜病變,PREEMIE,FOLLOW,眼睛的視網膜血管還沒長完，可能長得不正常，嚴重時會影響視力。符合條件的早產兒需由眼科醫師定期篩檢。,依醫師安排的時間回診做眼底檢查，不要錯過。長大後若發現眼睛對不到焦、斜視或對光線反應差，請就醫。,PUBLISHED,,,head,ntuh-rop
+ivh,腦室內出血,PREEMIE,FOLLOW,早產兒腦部的血管很脆弱，可能在腦室周圍出血，多發生在出生後頭幾天，住院期間會用頭部超音波追蹤。,依醫師安排做頭部超音波與發展評估。在家發現前囟門鼓起、頭圍增加過快或抽搐，請立即就醫。,PUBLISHED,,,head,tmuh-preemie
+pda,開放性動脈導管,PREEMIE,FOLLOW,心臟附近一條出生後應該關閉的血管（動脈導管）沒有關閉，可能增加心臟和肺的負擔。,依小兒心臟科安排追蹤。出現呼吸變喘、吸奶量明顯減少時請就醫。,PUBLISHED,,,chest,tmuh-preemie
+anemia,早產兒貧血,PREEMIE,FOLLOW,早產兒體內儲存的鐵質少、製造紅血球的速度慢，常會貧血，醫師可能會開鐵劑。,依醫囑補充鐵劑並回診抽血追蹤。明顯蒼白合併呼吸喘、活動力差時請就醫。,PUBLISHED,,,"head,chest",

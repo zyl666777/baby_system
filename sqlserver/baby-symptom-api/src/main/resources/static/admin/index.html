@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>症狀資料管理</title>
+  <link rel="stylesheet" href="/admin/admin.css" />
+  <script src="/admin/admin.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>症狀資料管理</h1>
+    <nav class="tabs" role="tablist">
+      <button type="button" class="tab on" data-tab="symptoms" role="tab">症狀</button>
+      <button type="button" class="tab" data-tab="audit" role="tab">稽核紀錄</button>
+    </nav>
+    <div class="who">
+      <span id="whoami"></span>
+      <form method="post" action="/logout" id="logoutForm">
+        <input type="hidden" name="_csrf" id="logoutCsrf" />
+        <button type="submit" class="btn ghost">登出</button>
+      </form>
+    </div>
+  </header>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <!-- 症狀分頁 -->
+  <main id="tab-symptoms" class="layout">
+    <section class="list-pane">
+      <div class="list-tools">
+        <input type="search" id="search" placeholder="搜尋名稱或代碼" aria-label="搜尋" />
+        <select id="filterStatus" aria-label="狀態篩選">
+          <option value="">全部狀態</option>
+          <option value="DRAFT">草稿</option>
+          <option value="PUBLISHED">已發布</option>
+          <option value="ARCHIVED">已下架</option>
+        </select>
+        <select id="filterSeverity" aria-label="嚴重程度篩選">
+          <option value="">全部程度</option>
+          <option value="EMERGENCY">立即急診</option>
+          <option value="SOON">盡快就醫</option>
+          <option value="HOME">居家觀察</option>
+          <option value="FOLLOW">定期追蹤</option>
+        </select>
+        <select id="filterCategory" aria-label="分類篩選">
+          <option value="">全部分類</option>
+          <option value="GENERAL">一般症狀</option>
+          <option value="PREEMIE">早產兒</option>
+        </select>
+        <button type="button" class="btn primary" id="newBtn">＋ 新增症狀</button>
+      </div>
+      <table class="list">
+        <thead>
+          <tr><th>名稱</th><th>分類</th><th>程度</th><th>狀態</th><th>最後修改</th></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <p id="listEmpty" class="muted center" hidden>沒有符合條件的症狀</p>
+    </section>
+
+    <section class="form-pane">
+      <form id="form" novalidate>
+        <div class="form-head">
+          <h2 id="formTitle">新增症狀</h2>
+          <span id="formMeta" class="muted small"></span>
+        </div>
+
+        <div class="error-banner" id="formError" hidden></div>
+
+        <div class="row two">
+          <label class="field">
+            <span>症狀名稱 <b class="req">*</b></span>
+            <input name="name" maxlength="50" placeholder="例如：新生兒黃疸" />
+            <small class="err" data-err="name"></small>
+          </label>
+          <label class="field">
+            <span>代碼 <b class="req">*</b></span>
+            <input name="code" maxlength="40" placeholder="例如：jaundice" autocomplete="off" />
+            <small class="hint">小寫英文、數字、連字號；前端用它辨識症狀</small>
+            <small class="err" data-err="code"></small>
+          </label>
+        </div>
+
+        <fieldset class="field">
+          <legend>分類 <b class="req">*</b></legend>
+          <div class="seg">
+            <label class="seg-item cat"><input type="radio" name="category" value="GENERAL" /><span>一般症狀</span></label>
+            <label class="seg-item cat"><input type="radio" name="category" value="PREEMIE" /><span>早產兒常見問題</span></label>
+          </div>
+          <small class="err" data-err="category"></small>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>嚴重程度 <b class="req">*</b></legend>
+          <div class="seg" id="severityGroup">
+            <label class="seg-item sev-EMERGENCY"><input type="radio" name="severity" value="EMERGENCY" /><span>立即急診</span></label>
+            <label class="seg-item sev-SOON"><input type="radio" name="severity" value="SOON" /><span>盡快就醫</span></label>
+            <label class="seg-item sev-HOME"><input type="radio" name="severity" value="HOME" /><span>居家觀察</span></label>
+            <label class="seg-item sev-FOLLOW"><input type="radio" name="severity" value="FOLLOW" /><span>定期追蹤</span></label>
+          </div>
+          <small class="err" data-err="severity"></small>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>相關部位 <b class="req">*</b></legend>
+          <div class="checks" id="partChecks"></div>
+          <small class="err" data-err="parts"></small>
+        </fieldset>
+
+        <label class="field">
+          <span>簡介 <b class="req">*</b> <em class="count" data-count="summary"></em></span>
+          <textarea name="summary" rows="3" maxlength="500" placeholder="用家長看得懂的話說明這是什麼"></textarea>
+          <small class="err" data-err="summary"></small>
+        </label>
+
+        <fieldset class="field">
+          <legend>可能看到的徵兆 <b class="req">*</b></legend>
+          <ol class="signs" id="signs"></ol>
+          <button type="button" class="btn ghost small" id="addSign">＋ 新增一項徵兆</button>
+          <small class="err" data-err="signs"></small>
+        </fieldset>
+
+        <label class="field">
+          <span>什麼時候要就醫 <b class="req">*</b> <em class="count" data-count="whenToSeeDoctor"></em></span>
+          <textarea name="whenToSeeDoctor" rows="3" maxlength="500" placeholder="寫清楚哪些情況要立即就醫"></textarea>
+          <small class="err" data-err="whenToSeeDoctor"></small>
+        </label>
+
+        <div class="row three">
+          <label class="field">
+            <span>狀態 <b class="req">*</b></span>
+            <select name="status">
+              <option value="DRAFT">草稿（不公開）</option>
+              <option value="PUBLISHED">已發布</option>
+              <option value="ARCHIVED">已下架</option>
+            </select>
+            <small class="err" data-err="status"></small>
+          </label>
+          <label class="field">
+            <span>醫療審閱者</span>
+            <input name="reviewedBy" maxlength="50" placeholder="例如：王醫師（兒科）" />
+            <small class="err" data-err="reviewedBy"></small>
+          </label>
+          <label class="field">
+            <span>審閱日期</span>
+            <input name="reviewedAt" type="date" />
+            <small class="err" data-err="reviewedAt"></small>
+          </label>
+        </div>
+        <p class="warn small" id="reviewWarn" hidden>⚠️ 這筆要發布，但還沒有填醫療審閱者。</p>
+
+        <div class="actions">
+          <button type="submit" class="btn primary" id="saveBtn">儲存</button>
+          <button type="button" class="btn ghost" id="cancelBtn">取消</button>
+          <span class="spacer"></span>
+          <button type="button" class="btn danger" id="deleteBtn" hidden>刪除</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- 稽核紀錄分頁 -->
+  <main id="tab-audit" class="audit" hidden>
+    <div class="audit-head">
+      <h2>最近 100 筆操作紀錄</h2>
+      <button type="button" class="btn ghost" id="reloadAudit">重新整理</button>
+    </div>
+    <table class="list">
+      <thead><tr><th>時間</th><th>帳號</th><th>動作</th><th>對象</th><th>內容</th><th>IP</th></tr></thead>
+      <tbody id="auditRows"></tbody>
+    </table>
+  </main>
+</body>
+</html>
