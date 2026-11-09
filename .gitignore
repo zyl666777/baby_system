@@ -26,3 +26,4 @@ Thumbs.db
 *.pfx
 *.pem
 application-prod.properties
+baby-symptom-3d/scripts/.geocode-cache.json

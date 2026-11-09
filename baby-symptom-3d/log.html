@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>寶寶紀錄</title>
+    <link rel="stylesheet" href="/src/log.css" />
+  </head>
+  <body>
+    <header class="top">
+      <a class="back" href="./index.html">← 症狀圖解</a>
+      <h1>寶寶紀錄</h1>
+      <span class="spacer"></span>
+      <a class="back" href="./resources.html">育兒資源 →</a>
+    </header>
+
+    <main class="wrap">
+      <!-- 寶寶資料 -->
+      <section class="card" id="profileCard"></section>
+
+      <!-- 快速紀錄 -->
+      <section class="card">
+        <div class="card-head">
+          <h2>快速紀錄</h2>
+          <label class="when">時間 <input type="datetime-local" id="when" /></label>
+        </div>
+
+        <h3>餵食</h3>
+        <div class="btns">
+          <button type="button" class="big feed" data-feed="breastL">親餵 左</button>
+          <button type="button" class="big feed" data-feed="breastR">親餵 右</button>
+          <button type="button" class="big feed" data-feed="bottle">瓶餵</button>
+        </div>
+        <div class="ml">
+          <span>瓶餵量</span>
+          <button type="button" class="step" data-ml="-10" aria-label="減少 10 毫升">−</button>
+          <output id="mlOut">60</output><span>ml</span>
+          <button type="button" class="step" data-ml="10" aria-label="增加 10 毫升">＋</button>
+        </div>
+
+        <h3>尿布</h3>
+        <div class="btns">
+          <button type="button" class="big diaper" data-diaper="wet">濕</button>
+          <button type="button" class="big diaper" data-diaper="dirty">便</button>
+          <button type="button" class="big diaper" data-diaper="both">濕＋便</button>
+        </div>
+        <div class="colors" id="colorPick" hidden>
+          <p>大便顏色？</p>
+          <div class="btns" id="colorBtns"></div>
+          <button type="button" class="link" id="colorSkip">略過</button>
+        </div>
+        <p class="alert" id="stoolAlert" hidden></p>
+      </section>
+
+      <!-- 今天 -->
+      <section class="card">
+        <div class="card-head">
+          <h2>今天</h2>
+          <span class="muted small" id="sinceFeed"></span>
+        </div>
+        <div class="stats" id="todayStats"></div>
+        <ul class="timeline" id="timeline"></ul>
+      </section>
+
+      <!-- 最近 7 天 -->
+      <section class="card">
+        <h2>最近 7 天</h2>
+        <div class="legend"><i class="sw feed"></i>餵食次數　<i class="sw wet"></i>濕尿布　<i class="sw dirty"></i>大便</div>
+        <div class="week" id="week"></div>
+      </section>
+
+      <!-- 生長紀錄 -->
+      <section class="card">
+        <h2>生長紀錄</h2>
+        <form id="growthForm" class="grow-form">
+          <label>日期<input type="date" name="date" required /></label>
+          <label>體重 kg<input type="number" name="weight" step="0.01" min="0.3" max="30" inputmode="decimal" /></label>
+          <label>身長 cm<input type="number" name="length" step="0.1" min="20" max="130" inputmode="decimal" /></label>
+          <label>頭圍 cm<input type="number" name="head" step="0.1" min="15" max="60" inputmode="decimal" /></label>
+          <button type="submit" class="primary">新增</button>
+        </form>
+        <div class="chart-tabs" id="chartTabs">
+          <button type="button" class="on" data-metric="weight">體重</button>
+          <button type="button" data-metric="length">身長</button>
+          <button type="button" data-metric="head">頭圍</button>
+        </div>
+        <div id="growthChart" class="chart"></div>
+        <p class="note">此圖只畫出寶寶自己的量測趨勢。標準生長曲線（足月用 WHO、早產兒用 Fenton 並以矯正年齡計算）尚未加入，評估請以醫師判斷為準。</p>
+        <table class="grow-table" id="growthTable"></table>
+      </section>
+
+      <!-- 資料 -->
+      <section class="card">
+        <h2>資料備份</h2>
+        <p class="muted small">紀錄只存在這台裝置的瀏覽器裡，不會上傳到任何伺服器。清除瀏覽器資料或換手機會消失，請定期匯出備份。</p>
+        <div class="btns">
+          <button type="button" id="exportBtn">匯出備份</button>
+          <label class="file">匯入備份<input type="file" id="importFile" accept="application/json,.json" /></label>
+          <button type="button" class="danger" id="clearBtn">清除全部</button>
+        </div>
+      </section>
+
+      <p class="disclaimer">本頁為紀錄工具示範，不能取代醫師診斷。寶寶狀況不對勁時請就醫，緊急情況請撥 119。</p>
+    </main>
+
+    <div class="toast" id="toast" role="status" hidden></div>
+    <script type="module" src="/src/log.js"></script>
+  </body>
+</html>

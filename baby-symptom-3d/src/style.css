@@ -132,6 +132,12 @@ ul { padding-left: 1.2em; line-height: 1.7; }
 .panel-head { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
 .see-doctor { color: var(--c); }
 
+/* 標題與紀錄連結 */
+.title-row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.nav-log { font-size: 0.85rem; color: var(--accent); text-decoration: none; white-space: nowrap; }
+.nav-log:hover { text-decoration: underline; }
+.nav-links { display: flex; gap: 12px; }
+
 /* 模式切換 */
 .modes {
   display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin: 14px 0 6px;

@@ -1,0 +1,95 @@
+/* 育兒資源頁。共用 log.css 的色票與卡片樣式 */
+@import './log.css';
+
+.span-2 { grid-column: 1 / -1; }
+.picker { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.picker p { flex-basis: 100%; margin: 0; }
+select, input[type='search'] {
+  font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--surface); color: var(--text); min-width: 0;
+}
+#county { font-size: 1rem; min-width: 180px; }
+#facilitySearch { width: min(260px, 100%); }
+
+a { color: var(--accent); }
+.tag {
+  display: inline-block; font-size: 0.75rem; padding: 2px 8px; border-radius: 999px;
+  background: var(--bg); color: var(--muted); border: 1px solid var(--line); white-space: nowrap;
+}
+.tag.warn { background: #fff4e0; color: #8a5a00; border-color: #f3d9a4; }
+.tag.tiny { font-size: 0.68rem; padding: 0 6px; margin-left: 6px; vertical-align: middle; }
+.notice { background: #fff4e0; border: 1px solid #f3d9a4; border-radius: 10px; padding: 8px 10px; color: #6b4a00; }
+.source { margin-top: 10px; }
+
+/* 中央政策表 */
+.table-scroll { overflow-x: auto; }
+.policy-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 520px; }
+.policy-table th, .policy-table td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.5; }
+.policy-table thead th { color: var(--muted); font-weight: 500; font-size: 0.82rem; }
+.policy-table tbody th { white-space: nowrap; }
+
+/* 縣市生育獎勵 */
+.bonus-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 10px 0; }
+.bonus { background: var(--bg); border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 4px; }
+.bonus strong { font-size: 1.05rem; }
+
+/* 試算 */
+.calc-form fieldset { border: 0; padding: 0; margin: 0 0 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+.calc-form legend { font-size: 0.85rem; color: var(--muted); margin-bottom: 6px; padding: 0; }
+.calc-form label {
+  display: inline-flex; align-items: center; gap: 4px; padding: 6px 10px;
+  border: 1px solid var(--line); border-radius: 999px; cursor: pointer; font-size: 0.9rem;
+}
+.calc-form label:has(input:checked) { border-color: var(--accent); background: #eef3fd; color: var(--accent); }
+.calc-form input { accent-color: var(--accent); margin: 0; }
+.calc-result { border-top: 1px solid var(--line); padding-top: 4px; }
+.calc-block h3 { margin-top: 12px; }
+.calc-list { list-style: none; padding: 0; margin: 0; }
+.calc-list li { display: flex; justify-content: space-between; gap: 8px; padding: 5px 0; font-size: 0.92rem; }
+.total { text-align: right; margin: 4px 0 0; }
+.total strong { font-size: 1.15rem; color: var(--accent); }
+.notes { padding-left: 18px; color: var(--muted); }
+
+/* 地圖與清單 */
+.map-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 12px; margin-top: 8px; }
+.map { height: 440px; border-radius: 12px; border: 1px solid var(--line); overflow: hidden; z-index: 0; }
+.facility-list { list-style: none; margin: 0; padding: 0; max-height: 440px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+.facility { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+.facility.active { border-color: var(--accent); box-shadow: 0 0 0 2px #dfe8fb; }
+.facility-main {
+  all: unset; display: flex; flex-direction: column; gap: 3px; cursor: pointer; width: 100%;
+}
+.facility-main:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+.facility-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+.empty { color: var(--muted); padding: 16px; border: 1px dashed var(--line); border-radius: 12px; line-height: 1.7; }
+.links { padding-left: 18px; columns: 2; }
+.links li { margin-bottom: 4px; }
+
+.county-bubble {
+  display: flex !important; align-items: center; justify-content: center;
+  background: #ffffff; color: var(--accent); border: 2px solid var(--accent); border-radius: 50%;
+  font-weight: 700; font-size: 0.8rem; box-shadow: 0 1px 4px rgb(0 0 0 / 0.2);
+}
+.county-bubble.active { background: var(--accent); color: #fff; }
+
+.disclaimer { text-align: center; margin: 0; }
+
+@media (max-width: 760px) {
+  .map-layout { grid-template-columns: 1fr; }
+  .map { height: 320px; }
+  .facility-list { max-height: none; }
+  .links { columns: 1; }
+  .bonus strong { font-size: 0.95rem; }
+}
+
+/* 選項標籤不換行（窄卡片時整顆換到下一行） */
+.calc-form label { white-space: nowrap; flex: 0 0 auto; }
+
+/* 手機：政策表改成一列一張小卡，不用左右滑 */
+@media (max-width: 760px) {
+  .policy-table { min-width: 0; }
+  .policy-table thead { display: none; }
+  .policy-table tr { display: block; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .policy-table th, .policy-table td { display: block; border: 0; padding: 2px 0; }
+  .policy-table td:nth-child(2) { color: var(--muted); font-size: 0.85rem; }
+}
