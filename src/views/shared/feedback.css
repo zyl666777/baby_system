@@ -1,0 +1,44 @@
+/* 回報對話框：兩個頁面共用，顏色用頁面的變數，沒有時用預設值 */
+.fb-dialog {
+  width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow-y: auto;
+  border: 0; border-radius: 16px; padding: 20px; color: var(--text, #2d2a26); background: var(--surface, #fff);
+  box-shadow: 0 20px 50px rgb(0 0 0 / 0.25);
+  font-family: inherit;
+}
+.fb-dialog::backdrop { background: rgb(30 25 20 / 0.45); }
+.fb-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.fb-head h2 { margin: 0; font-size: 1.1rem; }
+.fb-close { border: 0; background: none; font-size: 1.1rem; cursor: pointer; color: var(--muted, #7a726a); padding: 4px 8px; }
+.fb-target { margin: 4px 0 10px; color: var(--muted, #7a726a); font-size: 0.9rem; }
+.fb-form { display: flex; flex-direction: column; gap: 12px; }
+.fb-field { display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem; }
+.fb-field > span { font-weight: 600; }
+.fb-field input, .fb-field select, .fb-field textarea {
+  font: inherit; padding: 8px 10px; border: 1px solid var(--line, #ebe4dc); border-radius: 10px;
+  background: var(--surface, #fff); color: inherit; width: 100%;
+}
+.fb-field textarea { resize: vertical; }
+.fb-hint { color: var(--muted, #7a726a); font-size: 0.8rem; margin: 0; }
+.fb-err { color: #c0392b; font-size: 0.8rem; min-height: 0; }
+.fb-err:empty { display: none; }
+.fb-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.fb-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 14px; }
+.fb-actions .fb-hint { flex-basis: 100%; }
+.fb-btn {
+  font: inherit; font-size: 0.9rem; padding: 8px 14px; border-radius: 999px; cursor: pointer; text-decoration: none;
+  border: 1px solid var(--line, #ebe4dc); background: var(--surface, #fff); color: var(--text, #2d2a26);
+}
+.fb-btn.primary { background: var(--accent, #3d6fd6); border-color: var(--accent, #3d6fd6); color: #fff; }
+.fb-btn.line { background: #06c755; border-color: #06c755; color: #fff; }
+.fb-btn:disabled { opacity: 0.6; cursor: wait; }
+.fb-msg { margin: 10px 0 0; padding: 8px 10px; border-radius: 10px; font-size: 0.9rem; }
+.fb-msg.ok { background: #eaf6ef; color: #23663f; }
+.fb-msg.err { background: #fdecea; color: #a12a1f; }
+.fb-note { margin: 14px 0 0; font-size: 0.78rem; color: var(--muted, #7a726a); }
+
+/* 頁面上的「回報錯誤」小連結 */
+.report-link {
+  border: 0; background: none; padding: 0; font: inherit; font-size: 0.82rem; cursor: pointer;
+  color: var(--muted, #7a726a); text-decoration: underline; text-underline-offset: 2px;
+}
+.report-link:hover { color: var(--accent, #3d6fd6); }

@@ -1,0 +1,27 @@
+:root { --ticker-h: 30px; }
+
+.ticker {
+  height: var(--ticker-h); overflow: hidden; display: flex; align-items: center;
+  background: #c0392b; color: #fff; font-size: 0.88rem; font-weight: 700; letter-spacing: 0.04em;
+}
+.ticker-track { display: flex; width: max-content; animation: ticker-scroll 28s linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; } /* 滑鼠移上去暫停，方便閱讀 */
+.ticker-group { display: flex; }
+.ticker-group span { padding: 0 2.5em; white-space: nowrap; }
+.ticker-group span::before { content: '☎ '; }
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* 使用者在系統設定「減少動態效果」：不捲動，置中顯示一次 */
+@media (prefers-reduced-motion: reduce) {
+  .ticker { justify-content: center; }
+  .ticker-track { animation: none; width: auto; }
+  .ticker-group + .ticker-group, .ticker-group span + span { display: none; }
+}
+
+/* 症狀頁原本占滿整個畫面高度，扣掉跑馬燈 */
+.has-ticker .app { height: calc(100vh - var(--ticker-h)); }
+@media (max-width: 900px) { .has-ticker .app { height: auto; } }

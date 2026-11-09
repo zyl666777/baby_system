@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>育兒資源</title>
+  </head>
+  <body>
+    <header class="top">
+      <a class="back" href="./index.html">← 症狀圖解</a>
+      <h1>育兒資源</h1>
+      <span class="spacer"></span>
+      <a class="back" href="./log.html">寶寶紀錄 →</a>
+    </header>
+
+    <main class="wrap">
+      <!-- 縣市選擇 -->
+      <section class="card picker">
+        <label for="county"><strong>我住在</strong></label>
+        <select id="county"></select>
+        <p class="small muted">選好縣市後，下面的補助、試算和托育地圖都會跟著換。</p>
+      </section>
+
+      <!-- 中央政策 -->
+      <section class="card span-2">
+        <h2>中央補助：0–6 歲國家一起養</h2>
+        <div id="central"></div>
+      </section>
+
+      <!-- 縣市生育獎勵 -->
+      <section class="card" id="countyCard"></section>
+
+      <!-- 補助試算 -->
+      <section class="card">
+        <h2>補助試算</h2>
+        <form id="calcForm" class="calc-form">
+          <fieldset>
+            <legend>這是第幾胎</legend>
+            <label><input type="radio" name="parity" value="1" checked /> 第 1 胎</label>
+            <label><input type="radio" name="parity" value="2" /> 第 2 胎</label>
+            <label><input type="radio" name="parity" value="3" /> 第 3 胎以上</label>
+          </fieldset>
+          <fieldset>
+            <legend>0–2 歲誰照顧</legend>
+            <label><input type="radio" name="care" value="home" checked /> 自己帶</label>
+            <label><input type="radio" name="care" value="public" /> 公共化托育</label>
+            <label><input type="radio" name="care" value="quasi" /> 準公共托育</label>
+          </fieldset>
+          <fieldset data-income-row hidden>
+            <legend>家庭身分</legend>
+            <label><input type="radio" name="income" value="normal" checked /> 一般</label>
+            <label><input type="radio" name="income" value="midLow" /> 中低收入戶</label>
+            <label><input type="radio" name="income" value="low" /> 低收入戶</label>
+          </fieldset>
+        </form>
+        <div id="calcResult" class="calc-result" aria-live="polite"></div>
+      </section>
+
+      <!-- 托育地圖 -->
+      <section class="card span-2">
+        <div class="card-head">
+          <h2>公共托育地圖</h2>
+          <input id="facilitySearch" type="search" placeholder="搜尋名稱、行政區、地址" aria-label="搜尋托育據點" />
+        </div>
+        <div id="facilityMeta"></div>
+        <div class="map-layout">
+          <div id="map" class="map" role="region" aria-label="托育據點地圖"></div>
+          <ul id="facilityList" class="facility-list"></ul>
+        </div>
+        <h3>全國查詢（含私立托嬰中心、居家保母）</h3>
+        <ul id="childcareLinks" class="links small"></ul>
+      </section>
+
+      <p class="disclaimer small muted span-2">
+        本頁整理公開資訊供參考，不是官方網站。補助資格、金額與托育名額請以中央及各縣市主管機關公告為準。
+      </p>
+    </main>
+
+    <script type="module" src="/src/resources.js"></script>
+  </body>
+</html>
